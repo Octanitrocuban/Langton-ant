@@ -16,7 +16,8 @@ A self implementation of the cellular automaton named the Langton-ant.
  ### Some exemple of the possibility:
  
  Some step plot with: FourmiDeLangton('white_right', 400, 15000, Walk=1000)
- <center>![image0](SimpleLangtonAnt.png){width=20% }</center>
+ 
+ ![image0](SimpleLangtonAnt.png){width=20%}
  
  The 490 000-th iteration of: FourmiDeLangton('white_right', 400, 500000, trap=True, Walk=10000)
  ![image1](TrappedLangtonAnt.png)
