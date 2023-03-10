@@ -9,14 +9,25 @@ A self implementation of the cellular automaton named the Langton-ant.
  
  * Plot_state: Function to plot the sate of the plate and of the ant.
  
- * Plot_BW_rate: .
+ * Plot_BW_rate: Function to plot the evolution of the filling of the plate by cells equal	to 0 or to 1.
  
  * FourmiDeLangton: Function to create and make evolve a Langton ant model.
  
  ### Some exemple of the possibility:
  
  Some step plot with: FourmiDeLangton('white_right', 400, 15000, Walk=1000)
- ![image0](SimpleLangtonAnt.png)
+ <center>
+![image0](SimpleLangtonAnt.png){
+width=20% }
+</center>
  
  The 490 000-th iteration of: FourmiDeLangton('white_right', 400, 500000, trap=True, Walk=10000)
  ![image1](TrappedLangtonAnt.png)
+
+Final stage and the history of the proportion of white and black cell with: FourmiDeLangton('white_right', 250, 800000, trap=True, Walk=400000)
+
+2d histogram of the exploration of the cell with: FourmiDeLangton('white_right', 250, 800000, trap=True, Walk=400000)
+
+Distribution of the looks with: FourmiDeLangton('white_right', 250, 800000, trap=True, Walk=400000)
+
+Final stage for: FourmiDeLangton('white_right', 250, 100000, trap=True, Fill='1', Walk=100000), FourmiDeLangton('white_left', 250, 100000, trap=True, Walk=100000), FourmiDeLangton('white_right', 250, 100000, trap=True, Fill='rand', Walk=100000)
