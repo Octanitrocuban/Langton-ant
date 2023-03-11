@@ -22,9 +22,13 @@ A self implementation of the cellular automaton named the Langton-ant.
  ![image1](TrappedLangtonAnt.png)
 
 Final stage and the history of the proportion of white and black cell with: FourmiDeLangton('white_right', 250, 800000, trap=True, Walk=400000)
+![image2](Langton-State-BW.png)
 
 2d histogram of the exploration of the cell with: FourmiDeLangton('white_right', 250, 800000, trap=True, Walk=400000)
 
+
 Distribution of the looks with: FourmiDeLangton('white_right', 250, 800000, trap=True, Walk=400000)
 
+
 Final stage for: FourmiDeLangton('white_right', 250, 100000, trap=True, Fill='1', Walk=100000), FourmiDeLangton('white_left', 250, 100000, trap=True, Walk=100000), FourmiDeLangton('white_right', 250, 100000, trap=True, Fill='rand', Walk=100000)
+![image5](3Langtons.png)
