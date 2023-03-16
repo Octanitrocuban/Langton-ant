@@ -39,6 +39,27 @@ def EtapeFourmiBD(Array, X, Y, look):
 	look : str
 		The new direction in which the ant look.
 
+	Exemple
+	-------
+	In [0] : _, x, y, look
+	Out [0] : array([[0, 0, 0, 0, 0],
+					 [0, 0, 0, 0, 0],
+					 [0, 0, 0, 0, 0],
+					 [0, 0, 0, 0, 0],
+					 [0, 0, 0, 0, 0]])
+			 3
+			 3
+			 'N'
+	In [1] : EtapeFourmiBD(_, x, y, look)
+	0ut [1] : array([[0, 0, 0, 0, 0],
+					 [0, 0, 0, 0, 0],
+					 [0, 0, 1, 0, 0],
+					 [0, 0, 0, 0, 0],
+					 [0, 0, 0, 0, 0]])
+			 3
+			 4
+			 'E'
+
 	"""
 	if Array[X, Y] == 0:
 		Array[X, Y] = 1
@@ -97,6 +118,26 @@ def EtapeFourmiBG(Array, X, Y, look):
 	look : str
 		The new direction in which the ant look.
 
+	Exemple
+	-------
+	In [0] : _, x, y, look
+	Out [0] : array([[0, 0, 0, 0, 0],
+					 [0, 0, 0, 0, 0],
+					 [0, 0, 0, 0, 0],
+					 [0, 0, 0, 0, 0],
+					 [0, 0, 0, 0, 0]])
+			 3
+			 3
+			 'N'
+	In [1] : EtapeFourmiBG(_, x, y, look)
+	0ut [1] : array([[0, 0, 0, 0, 0],
+					 [0, 0, 0, 0, 0],
+					 [0, 0, 1, 0, 0],
+					 [0, 0, 0, 0, 0],
+					 [0, 0, 0, 0, 0]])
+			 3
+			 2
+			 'O'
 	"""
 	if Array[X, Y] == 0:
 		Array[X, Y] = 1
@@ -146,6 +187,11 @@ def Plot_state(Plate, X, Y, look, step, FS):
 	-------
 	None.
 
+	Exemple
+	-------
+	In [0] :
+	Out [0] : 
+
 	"""
 	plt.figure(figsize=(FS, FS))
 	plt.title("Step : "+str(step)+" ; orientation : "+look)
@@ -153,19 +199,156 @@ def Plot_state(Plate, X, Y, look, step, FS):
 	if look == 'N':
 		plt.plot(Y, X, 'r^', label = str(X)+" ; "+str(Y))
 	elif look == 'E':
-		plt.plot(Y, X, 'r<', label = str(X)+" ; "+str(Y))
-	elif look == 'O':
 		plt.plot(Y, X, 'r>', label = str(X)+" ; "+str(Y))
+	elif look == 'O':
+		plt.plot(Y, X, 'r<', label = str(X)+" ; "+str(Y))
 	elif look == 'S':
 		plt.plot(Y, X, 'rv', label = str(X)+" ; "+str(Y))
 	plt.legend()
 	plt.show()
 
-def Plot_BW_rate(History):
+def Plot_BW_rate(History, FS):
+	"""
+	Function to plot the evolution of the filling of the plate by cells equal
+	to 0 or to 1.
+
+	Parameters
+	----------
+	History : numpy.ndarray
+		A numpy.ndarray storring the all the step of the evolution of the
+		Langton ant's.
+
+	Returns
+	-------
+	None.
+
+	Exemple
+	-------
+	In [0] : h, fs
+	Out [0] : array([[10, 10, 'N', 1.0, 0.0],
+					 [10, 11, 'E', 0.9975, 0.0025],
+					 [11, 11, 'S', 0.995, 0.005],
+					 [11, 10, 'O', 0.9925, 0.0075],
+					 [10, 10, 'N', 0.99, 0.01],
+					 [10, 9, 'O', 0.9925, 0.0075],
+					 [9, 9, 'N', 0.99, 0.01],
+					 [9, 10, 'E', 0.9875, 0.0125],
+					 [10, 10, 'S', 0.985, 0.015],
+					 [10, 9, 'O', 0.9825, 0.0175],
+					 [11, 9, 'S', 0.985, 0.015]], dtype=object),
+			  6
+	In [1] : HistVisitCells(h, a, fs)
+	Out [1] : matplotlib.pyplot image
+
+	"""
 	Steps = np.arange(len(History))
+	plt.figure(figsize=(FS*2, FS))
+	plt.plot(Steps, History[:, 3], label='cell 0')
+	plt.plot(Steps, History[:, 4], label='cell 1')
+	plt.legend(title='Proportion of the\nplate filled by:')
+	plt.show()
+
+def HistVisitCells(History, arrete, FS):
+	"""
+	Function to show the frenquentation of the cells of the plate.
+
+	Parameters
+	----------
+	History : numpy.ndarray
+		History of the evolution of the state of the ant.
+	arrete : int
+		Length os the plate which is a 2d square matrix.
+	FS : int
+		Figure size of the plot.
+
+	Returns
+	-------
+	Map : numpy.ndarray
+		A 2d histogram which counts the number of time that each cell were
+		visited by the ant.
+
+	Exemple
+	-------
+	In [0] : h, a, fs
+	Out [0] : array([[10, 10, 'N', 1.0, 0.0],
+					 [10, 11, 'E', 0.9975, 0.0025],
+					 [11, 11, 'S', 0.995, 0.005],
+					 [11, 10, 'O', 0.9925, 0.0075],
+					 [10, 10, 'N', 0.99, 0.01],
+					 [10, 9, 'O', 0.9925, 0.0075],
+					 [9, 9, 'N', 0.99, 0.01],
+					 [9, 10, 'E', 0.9875, 0.0125],
+					 [10, 10, 'S', 0.985, 0.015],
+					 [10, 9, 'O', 0.9825, 0.0175],
+					 [11, 9, 'S', 0.985, 0.015]], dtype=object),
+			  10,
+			  6
+	In [1] : HistVisitCells(h, a, fs)
+	Out [1] : matplotlib.pyplot image,
+			  array([[0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+					 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+					 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+					 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+					 [0. 0. 0. 0. 1. 1. 0. 0. 0. 0.]
+					 [0. 0. 0. 0. 2. 3. 1. 0. 0. 0.]
+					 [0. 0. 0. 0. 1. 1. 1. 0. 0. 0.]
+					 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+					 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+					 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]])
+
+	"""
+	Map = np.zeros((arrete, arrete))
+	values, counts = np.unique(History[:, :2].astype(int), axis=0,
+							return_counts=True)
+	for i in range(len(values)):
+		Map[values[i, 0], values[i, 1]] = counts[i]
+
+	plt.figure(figsize=(FS, FS))
+	plt.title('Histogram')
+	plt.imshow(Map, cmap='jet', interpolation='Nearest')
+	plt.colorbar(shrink=0.7, pad=0.01, label='Number of exploration')
+	plt.show()
+	return Map
+
+def HistLooks(History):
+	"""
+	Function to plot the distribution of the direction in which the ant have
+	looked during the evolution.
+
+	Parameters
+	----------
+	History : numpy.ndarray
+		History of the evolution of the state of the ant.
+
+	Returns
+	-------
+	None.
+
+	Exemple
+	-------
+	In [0] : h, fs
+	Out [0] : array([[10, 10, 'N', 1.0, 0.0],
+					 [10, 11, 'E', 0.9975, 0.0025],
+					 [11, 11, 'S', 0.995, 0.005],
+					 [11, 10, 'O', 0.9925, 0.0075],
+					 [10, 10, 'N', 0.99, 0.01],
+					 [10, 9, 'O', 0.9925, 0.0075],
+					 [9, 9, 'N', 0.99, 0.01],
+					 [9, 10, 'E', 0.9875, 0.0125],
+					 [10, 10, 'S', 0.985, 0.015],
+					 [10, 9, 'O', 0.9825, 0.0175],
+					 [11, 9, 'S', 0.985, 0.015]], dtype=object),
+			  6
+	In [1] : HistLooks(h, a, fs)
+	Out [1] : matplotlib.pyplot image
+
+	"""
+	values, counts = np.unique(History[:, 2], return_counts=True)
 	plt.figure()
-	plt.plot(Steps, History[:, 3], label='0 cell distribution')
-	plt.plot(Steps, History[:, 4], label='1 cell distribution')
+	plt.vlines(range(4), 0, counts, lw=6)
+	plt.ylabel('count')
+	plt.xlabel('Looks directions')
+	plt.xticks(range(4), values)
 	plt.show()
 
 def FourmiDeLangton(modele, arrete, steps, start_color='white', look='N',
@@ -231,7 +414,20 @@ def FourmiDeLangton(modele, arrete, steps, start_color='white', look='N',
 	Exemple
 	-------
 	# The following exemple will show you the construction of the higway.
-	Input[0] : FourmiDeLangton('white_right', 400, 15000, Walk=1000)
+	In [0] : FourmiDeLangton('white_right', 400, 15000, Walk=1000)
+	
+	In [1] : FourmiDeLangton('white_right', 10, 10)
+	Out [1] : array([[10, 10, 'N', 1.0, 0.0],
+					 [10, 11, 'E', 0.9975, 0.0025],
+					 [11, 11, 'S', 0.995, 0.005],
+					 [11, 10, 'O', 0.9925, 0.0075],
+					 [10, 10, 'N', 0.99, 0.01],
+					 [10, 9, 'O', 0.9925, 0.0075],
+					 [9, 9, 'N', 0.99, 0.01],
+					 [9, 10, 'E', 0.9875, 0.0125],
+					 [10, 10, 'S', 0.985, 0.015],
+					 [10, 9, 'O', 0.9825, 0.0175],
+					 [11, 9, 'S', 0.985, 0.015]], dtype=object)
 
 	"""
 	if Fill == '0':
@@ -262,7 +458,6 @@ def FourmiDeLangton(modele, arrete, steps, start_color='white', look='N',
 			plateau, x, y, look = EtapeFourmiBD(plateau, x, y, look)
 			Whites = len(plateau[plateau == 0])/L
 			Blacks  = len(plateau[plateau == 1])/L
-			History.append([x, y, look, Whites, Blacks])
 
 			if trap:
 				x = x%arrete ; y = y%arrete
@@ -271,9 +466,10 @@ def FourmiDeLangton(modele, arrete, steps, start_color='white', look='N',
 					print("The ant ant is out of frame.")
 					break
 
+			History.append([x, y, look, Whites, Blacks])
 			if Plot == True:
 				if (i%Walk) == 0:
-					Plot_state(plateau, x, y, look, i, FS)
+					Plot_state(plateau, x, y, look, i+1, FS)
 
 	elif modele == "white_left":
 		for i in range(steps):
@@ -281,7 +477,6 @@ def FourmiDeLangton(modele, arrete, steps, start_color='white', look='N',
 			plateau, x, y, look = EtapeFourmiBD(plateau, x, y, look)
 			Whites = len(plateau[plateau == 0])/L
 			Blacks  = len(plateau[plateau == 1])/L
-			History.append([x, y, look, Whites, Blacks])
 
 			if trap:
 				x = x%arrete ; y = y%arrete
@@ -290,13 +485,16 @@ def FourmiDeLangton(modele, arrete, steps, start_color='white', look='N',
 					print("The ant ant is out of frame.")
 					break
 
+			History.append([x, y, look, Whites, Blacks])
 			if Plot == True:
 				if (i%Walk) == 0:
-					Plot_state(plateau, x, y, look, i, FS)
+					Plot_state(plateau, x, y, look, i+1, FS)
 
 	History = np.array(History, dtype=object)
 	if Plot:
 		Plot_state(plateau, x%arrete, y%arrete, look, i, FS)
-		Plot_BW_rate(History)
+		Plot_BW_rate(History, FS)
+		HistVisitCells(History, arrete, FS)
+		HistLooks(History)
 
 	return History
