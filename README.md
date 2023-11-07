@@ -20,7 +20,7 @@ A self implementation of the cellular automaton named the Langton-ant.
  ### Some exemple of the possibility:
  
  Some step plot with: langton_ant('white_right', 400, 15000, walk=1000)
- ![image0](SimpleLangtonAnt.png)
+ ![image0](img/SimpleLangtonAnt.png)
  
  The 490 000-th iteration of: langton_ant('white_right', 400, 500000, trap=True, walk=10000)
  ![image1](TrappedLangtonAnt.png)
