@@ -23,16 +23,16 @@ A self implementation of the cellular automaton named the Langton-ant.
  ![image0](img/SimpleLangtonAnt.png)
  
  The 490 000-th iteration of: langton_ant('white_right', 400, 500000, trap=True, walk=10000)
- ![image1](TrappedLangtonAnt.png)
+ ![image1](img/TrappedLangtonAnt.png)
 
 Final stage and the history of the proportion of white and black cell with: langton_ant('white_right', 250, 800000, trap=True, walk=400000)
-![image2](Langton-State-BW.png)
+![image2](img/Langton-State-BW.png)
 
 2d histogram of the exploration of the cell with: langton_ant('white_right', 250, 800000, trap=True, walk=400000)
-![image3](Exploration.png)
+![image3](img/Exploration.png)
 
 Distribution of the looks with: langton_ant('white_right', 250, 800000, trap=True, walk=400000)
-![image4](looks.png)
+![image4](img/looks.png)
 
 Final stage for: langton_ant('white_right', 250, 100000, trap=True, fill='1', walk=100000), langton_ant('white_left', 250, 100000, trap=True, walk=100000), langton_ant('white_right', 250, 100000, trap=True, fill='rand', walk=100000)
-![image5](3Langtons.png)
+![image5](img/3Langtons.png)
