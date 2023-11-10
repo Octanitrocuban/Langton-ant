@@ -250,10 +250,10 @@ def plot_black_white_rate(history, figsz):
 	Out [1]: matplotlib.pyplot image
 
 	"""
-	Steps = np.arange(len(history))
+	steps = np.arange(len(history))
 	plt.figure(figsize=(figsz*2, figsz))
-	plt.plot(Steps, history[:, 3], label='cell 0')
-	plt.plot(Steps, history[:, 4], label='cell 1')
+	plt.plot(steps, history[:, 3], label='cell 0')
+	plt.plot(steps, history[:, 4], label='cell 1')
 	plt.legend(title='Proportion of the\nplate filled by:')
 	plt.show()
 
