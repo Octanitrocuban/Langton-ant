@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-@author: Matthieu Nougaret
-
 module containing function to create show and analyse the Langton ant
 algorithm.
 """
